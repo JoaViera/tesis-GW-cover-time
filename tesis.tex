@@ -1,0 +1,160 @@
+\documentclass[12pt]{report}
+
+% Paquetes comunes
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage{titlesec}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{amsthm}  % Carga el paquete necesario
+
+\newtheorem{theorem}{Teorema}  % Define el entorno "theorem"
+\geometry{a4paper, margin=2.5cm}
+
+% Encabezados y pies de página
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyfoot[C]{\thepage}
+
+% Título
+\title{Título del Trabajo}
+\author{Tu Nombre Completo\\ \small{Universidad o Institución}}
+\date{\today}
+
+\begin{document}
+
+% Carátula
+\begin{titlepage}
+    \centering
+    \includegraphics[width=0.2\textwidth]{imagenes/logo_UBA.png}\par\vspace{1cm} % Cambiar por el logo si se desea
+    {\scshape\LARGE Universidad de Buenos Aires \par}
+    \vspace{1cm}
+    {\scshape\Large Facultad de Ciencias Exactas \par}
+    {\scshape\Large Departamento de Matemática \par}
+    \vspace{1.5cm}
+    {\huge\bfseries Comportamiento asintótico del tiempo de covertura en arboles de Galton-Watson\par}
+
+    \vspace{2cm}
+    {\Large Joaquin E. Viera\par}
+    \vspace{0.5cm}
+    {\Large Directora: Inés Armendariz \par}
+    {\Large Co-Director: Santiago Saglietti \par}
+
+    \vfill
+    {\large Fecha: \today\par}
+\end{titlepage}
+
+% Abstract
+\chapter*{Resumen / Abstract}
+\addcontentsline{toc}{chapter}{Resumen / Abstract}
+Aquí va el resumen del trabajo. Puedes incluir objetivos, metodología, resultados y conclusiones más importantes.
+
+\vspace{1cm}
+\textbf{Palabras clave:} palabra1, palabra2, palabra3.
+
+% Agradecimientos
+\chapter*{Agradecimientos}
+\addcontentsline{toc}{chapter}{Agradecimientos}
+Aquí puedes agradecer a quienes colaboraron en el desarrollo del trabajo: familiares, profesores, instituciones, etc.
+
+% Índice
+\tableofcontents
+\newpage
+
+% Introducción
+\chapter{Introducción}
+\section{Contexto}
+Describe el contexto general del tema tratado.
+
+\section{Motivación}
+Explica por qué elegiste este tema.
+
+\section{Objetivos}
+Menciona los objetivos generales y específicos.
+
+\section{Estructura del documento}
+Describe brevemente qué se trata en cada capítulo.
+
+% Capítulo 1
+\chapter{Presentación del modelo y preliminares}
+\section{Concepto 1}
+Explicación y fuentes.
+
+\section{Concepto 2}
+Más teoría relacionada.
+
+% Capítulo 2
+\chapter{Relación del cover timer con el branching process/GFF}
+\section{Diseño del estudio}
+Describe el enfoque.
+
+\section{Procedimientos}
+Explica cómo se llevó a cabo.
+
+% Capítulo 3
+\chapter{Resultado sobre el branching process}
+\section{Resultado sobre la ultima generación}
+Durante esta sección, para no sobrecargar de notación, dado un arbol de Galton-Watson $T$ que no se extingue 
+vamos a considerar $\mathbb{P}(\cdot|T) = \mathbb{P}(\cdot)$, analogamente con la esperanza.
+\begin{theorem}
+Dado un GFF $\eta = (\eta_{v})_{v \in T_{n}}$, construido como antes. Entonces,
+\begin{equation} 
+\mathbb{E}[\max_{v \in L_n} \eta_v] = n\sqrt{2\log m} \, (1 + o(1)).
+\end{equation}
+\end{theorem}
+
+\subsection{Cota superior}
+
+Sea $\bar{Z}_n = \sum_{v \in L_n} \mathbf{1}_{S_v > (1 + \epsilon)x^* n}$, 
+que cuenta la cantidad de vertices, en la $n$-th generación, 
+se encuentran por arriba de $n x^*(1 + \epsilon)$. Aplicando el metodo del primer momento: 
+tenemos, para todo $v \in L_n$,
+\[
+\mathbb{E} \bar{Z}_n = |L_n| \mathbb{P}(S_v > n(1 + \epsilon)x^*) \leq CW k^n e^{-n I((1 + \epsilon)x^*)},
+\]
+Donde aplicamos la desigualdad de Chebyshev en la ultima desigualdad y la definicion de $I$. Además, por 
+la monotonia estricta de $I$, tenemos que $\mathbb{E} \bar{Z}_n \leq e^{-n c(\epsilon)}$, 
+para algun $c(\epsilon) > 0$. Por lo tanto,
+\begin{equation}
+\mathbb{P}(M_n > (1 + \epsilon) n x^*) \leq \mathbb{E} [\bar{Z}_n] \leq CWe^{-c(\epsilon)n}.
+\end{equation}
+Por otro lado,
+\begin{equation}
+\mathbb{E}M_n \leq \mathbb{E}M_n\mathbf{1}_{M_n \geq 0} = \int_{0}^{\infty} \mathbb{P}(M_n > t) dt = 
+\int_{0}^{(1+\epsilon)nx^*} \mathbb{P}(M_n > t) dt + \int_{(1+\epsilon)nx^*}^{\infty} \mathbb{P}(M_n > t) dt 
+\end{equation}
+Luego, usando la cota de 4.2 en el segundo integrando de 4.3 e integrando, llegamos a que,
+\begin{equation}
+\mathbb{E}M_n \leq nx^*(1+\epsilon) + nx^* \frac{CWe^{-2nI(x^*)\epsilon}}{2nI(x^*)}.
+\end{equation}
+Para todo $\epsilon > 0$. Haciendo $\epsilon \to 0$ obtenemos la cota superior.
+
+\subsection{Cota inferior}
+
+
+
+\section{Resultado sobre todo el arbol}
+Comparación con literatura o hipótesis.
+
+% Capítulo 4
+\chapter{Conclusiones}
+\section{Conclusiones generales}
+Resumen de hallazgos.
+
+\section{Trabajo futuro}
+Ideas para desarrollos posteriores.
+
+% Bibliografía
+\begin{thebibliography}{9}
+\bibitem{autor2020}
+Apellido, Nombre. \textit{Título del libro o artículo}. Editorial, Año.
+
+\bibitem{otroautor2021}
+Otro Apellido, Otro Nombre. \textit{Otro título}. Otra Editorial, 2021.
+\end{thebibliography}
+
+\end{document}
