@@ -65,7 +65,7 @@ Aquí puedes agradecer a quienes colaboraron en el desarrollo del trabajo: famil
 \tableofcontents
 \newpage
 
-% Introducción
+% Introducción (capítulo 1)
 \chapter{Introducción}
 \section{Contexto}
 Describe el contexto general del tema tratado.
@@ -79,7 +79,7 @@ Menciona los objetivos generales y específicos.
 \section{Estructura del documento}
 Describe brevemente qué se trata en cada capítulo.
 
-% Capítulo 1
+% Capítulo 2
 \chapter{Presentación del modelo y preliminares}
 \section{Concepto 1}
 Explicación y fuentes.
@@ -87,7 +87,7 @@ Explicación y fuentes.
 \section{Concepto 2}
 Más teoría relacionada.
 
-% Capítulo 2
+% Capítulo 3
 \chapter{Relación del cover timer con el branching process/GFF}
 \section{Diseño del estudio}
 Describe el enfoque.
@@ -95,16 +95,16 @@ Describe el enfoque.
 \section{Procedimientos}
 Explica cómo se llevó a cabo.
 
-% Capítulo 3
+% Capítulo 4
 \chapter{Resultado sobre el branching process}
 \section{Resultado sobre la ultima generación}
 Durante esta sección, para no sobrecargar de notación, dado un arbol de Galton-Watson $T$ que no se extingue 
 vamos a considerar $\mathbb{P}(\cdot|T) = \mathbb{P}(\cdot)$, analogamente con la esperanza.
 \begin{theorem}
 Dado un GFF $\eta = (\eta_{v})_{v \in T_{n}}$, construido como antes. Entonces,
-\begin{equation} 
-\mathbb{E}[\max_{v \in L_n} \eta_v] = n\sqrt{2\log m} \, (1 + o(1)).
-\end{equation}
+\begin{align} 
+E[\max_{v \in L_n} \eta_v] = n\sqrt{2\log m} \, (1 + o(1)).
+\end{align}
 \end{theorem}
 
 \subsection{Cota superior}
@@ -114,26 +114,103 @@ que cuenta la cantidad de vertices, en la $n$-th generación,
 se encuentran por arriba de $n x^*(1 + \epsilon)$. Aplicando el metodo del primer momento: 
 tenemos, para todo $v \in L_n$,
 \[
-\mathbb{E} \bar{Z}_n = |L_n| \mathbb{P}(S_v > n(1 + \epsilon)x^*) \leq CW k^n e^{-n I((1 + \epsilon)x^*)},
+E\bar{Z}_n = |L_n| P(S_v > n(1 + \epsilon)x^*) \leq CW k^n e^{-n I((1 + \epsilon)x^*)},
 \]
 Donde aplicamos la desigualdad de Chebyshev en la ultima desigualdad y la definicion de $I$. Además, por 
-la monotonia estricta de $I$, tenemos que $\mathbb{E} \bar{Z}_n \leq e^{-n c(\epsilon)}$, 
+la monotonia estricta de $I$, tenemos que $E \bar{Z}_n \leq e^{-n c(\epsilon)}$, 
 para algun $c(\epsilon) > 0$. Por lo tanto,
-\begin{equation}
-\mathbb{P}(M_n > (1 + \epsilon) n x^*) \leq \mathbb{E} [\bar{Z}_n] \leq CWe^{-c(\epsilon)n}.
-\end{equation}
+\begin{align}
+P(M_n > (1 + \epsilon) n x^*) \leq E [\bar{Z}_n] \leq CWe^{-c(\epsilon)n}.
+\end{align}
 Por otro lado,
-\begin{equation}
-\mathbb{E}M_n \leq \mathbb{E}M_n\mathbf{1}_{M_n \geq 0} = \int_{0}^{\infty} \mathbb{P}(M_n > t) dt = 
-\int_{0}^{(1+\epsilon)nx^*} \mathbb{P}(M_n > t) dt + \int_{(1+\epsilon)nx^*}^{\infty} \mathbb{P}(M_n > t) dt 
-\end{equation}
+
+\begin{align}
+EM_n \leq EM_n\mathbf{1}_{M_n \geq 0} &= \int_{0}^{\infty} P(M_n > t) dt \nonumber\\
+&= \int_{0}^{(1+\epsilon)nx^*} P(M_n > t) dt + \int_{(1+\epsilon)nx^*}^{\infty} P(M_n > t) dt .\nonumber
+\end{align}
 Luego, usando la cota de 4.2 en el segundo integrando de 4.3 e integrando, llegamos a que,
-\begin{equation}
-\mathbb{E}M_n \leq nx^*(1+\epsilon) + nx^* \frac{CWe^{-2nI(x^*)\epsilon}}{2nI(x^*)}.
-\end{equation}
+\begin{align}
+EM_n \leq nx^*(1+\epsilon) + nx^* \frac{CWe^{-2nI(x^*)\epsilon}}{2nI(x^*)}.
+\end{align}
 Para todo $\epsilon > 0$. Haciendo $\epsilon \to 0$ obtenemos la cota superior.
 
 \subsection{Cota inferior}
+
+Sea $y>0$ independiente de $n$ y sea
+\[
+a_n = a_n(y) = x^*n - \frac{3}{2I'(x^*)} \text{log} n + y.
+\]
+Dado $v \in L_n$, definimos el evento
+\[
+A_v = \{ S_v \in [a_n-1,a_n], S_v(t)\leq a_n t / n + y, t = 1, \dots, n \},
+\]
+y sea
+\[
+Z_n = \sum_{v \in L_n}^{} \mathbf{1}_{A_v}.
+\]
+
+Para derivar una cota inferior de $EM_n$, primero necesitamos una cota inferior en la
+cola derecha de la distribucion de $M_n$, la cual vamos a obtener utilizando el metodo del segundo momento. 
+Para esto, primero calculamos $P(A_v)$. Recordemos que $I(x^*) = \text{log} k$, con $\lambda^*=I'(x^*)$. 
+Introducimos un nuevo parametro $\lambda_{n}^{*}$ tal que
+\[
+\lambda_{n}^{*}\frac{a_n}{n}-\varLambda(\lambda_{n}^{*}) = I(a_n/n).
+\]
+Como $I'(a_n/n) = \lambda_{n}^{*}$, es facil chequear que $\lambda_{n}^{*} = 
+\lambda^* - 3I''(x^*) \text{log}n/(2nI'(x^*)) + O(1/n)$. (En el caso Gaussiano, $\lambda_{n}^{*} = a_n / n $)
+
+Definimos una nueva medida de probabilidad $Q$ en $\mathbb{R}$ por
+\[
+\frac{d\mu}{dQ}(x) = e^{-\lambda_{n}^{*}x + \varLambda(\lambda_{n}^{*})},
+\]
+y con un abuso de notacion continuamos usan $Q$ cuando hablemos sobre un paseo aleatorio 
+cuyos incrementos sean i.i.d. y distribuidos de acuerdo a $Q$. Notar que en el caso Gaussiano, 
+$Q$ solamente modifica la media de $P$.
+
+\par Ahora podemos escribir 
+
+\begin{align}
+P(A_v) &= E_Q (e^{-\lambda_n^* S_v + n \Lambda(\lambda_n^*)} \mathbf{1}_{A_v}) \nonumber \\
+&\geq e^{-n [\lambda_n^* a_n/n - \Lambda(\lambda_n^*)]} E_Q(A_v) \\
+&= e^{-n I(a_n/n)} P_Q ( \tilde{S}_v \in [0,1], \tilde{S}_v (t) \geq 0, t = 1, \dots, n ). \nonumber 
+\end{align}
+
+donde $\tilde{S}_v (t) = a_n t / n - S_v (t)$ es un paseo aleatorio con incrementos i.i.d los cuales tienen media $0$ bajo $Q$. 
+Ademas, en el caso Gaussiano, los incrementos son Gaussianos y no dependen de $n$.
+
+Aplicando el Teorema de la votacion, obtenemos que 
+\begin{align}
+    P(A_v) \geq C \frac{y+1}{n^{3/2}} e^{-nI(a_n/n)}.
+\end{align}
+(agregar detalles sobre esto)
+Como 
+\[
+I(a_n/n) = I(x^*) - I'(x^*)\left(\frac{3}{2I'(x^*)}.\frac{\text{log}n}{n}-\frac{y}{n}\right)+O\left(\left(\frac{\text{log}n}{n}\right)^2\right),
+\]
+podemos concluir que
+\[
+P(A_v) \geq C(y+1)k^{-n}e^{-I'(x^*)y},
+\]
+y por lo tanto
+\begin{align}
+    EZ_n = |L_n| P(A_v) \geq \frac{W_T}{C_T}c_1 (y+1) e^{-I'(x^*)y}.
+\end{align}
+Dejamos resaltada la dependencia de las constantes del arbol, ya que va a jugar un papel principal en porque pedimos que tenga grado acotado la distribucion.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -147,14 +224,5 @@ Resumen de hallazgos.
 
 \section{Trabajo futuro}
 Ideas para desarrollos posteriores.
-
-% Bibliografía
-\begin{thebibliography}{9}
-\bibitem{autor2020}
-Apellido, Nombre. \textit{Título del libro o artículo}. Editorial, Año.
-
-\bibitem{otroautor2021}
-Otro Apellido, Otro Nombre. \textit{Otro título}. Otra Editorial, 2021.
-\end{thebibliography}
 
 \end{document}
