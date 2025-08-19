@@ -138,8 +138,11 @@ Necesito ver que $|D_s^v|$ es $O(k^s)$, es facil ver
 Me faltaria acotar esta constante $C$ universalmente para todo $v_s \in L_{n-s}$. Para esto puedo hacer una 
 especie de probabilidad total, donde condiciono a que todos estos subarboles a partir de la generacion $l$ 
 ya esten a lo sumo a distancia $\beta$ de su W, elijo $l$ y $\beta$ de forma que este evento tenga alta 
-probabilidad. Por lo que, puedo tomar $C = max\{k^l, \beta\}$. \\
-Ahora veamo de acotar $P(A_v \cap A_{v_s})$, para esto condicionamos al valor de $S_v (n-s)$. 
+probabilidad. Por lo que, puedo tomar $C = max\{k^l, \beta\}$. 
+
+\vspace{1em}
+
+Ahora veamos de acotar $P(A_v \cap A_{v_s})$, para esto condicionamos al valor de $S_v (n-s)$. 
 En particular, con un poco de abuso de notacion, notamos $I_{j,s} = a_n (n-s)/n + [-j,-j+1] + y$, ahora tenemos que
 \begin{align}
 &P(A_u \cap A_{v_s}) \leq \sum_{j=1}^{\infty} P\Big(S_v(t) \leq a_n t/n + y,\, t = 1, \ldots, n - s,\, S_v(n - s) \in I_{j,s}\Big) \nonumber \\
@@ -158,11 +161,45 @@ e^{-(n + s) I'(x^*) y / n}.
 \end{align}
 Agregar detalles\\
 
+Juntando todo,
+\begin{align*}
+    EZ_n^2
+    &= EZ_n + \sum_{v \in L_n} \sum_{s = 1}^{n} |D_s^v| \sum_{j=1}^{\infty} 
+    \frac{j^5 (y + 1)^2}{s^3 (n - s)^{3/2}} \, e^{-j \lambda^*} \, n^{\frac{3(n + s)}{2n}} \, k^{-(n + s)} \, e^{-(n + s) \frac{I'(x^*) y}{n}} \\
+    &\leq EZ_n + (y + 1)^2 \sum_{v \in L_n} \sum_{s = 1}^{n} \frac{K^s}{s^3 (n - s)^{3/2}} \, n^{\frac{3(n + s)}{2n}} \, k^{-(n + s)} \, e^{-(n + s) \frac{I'(x^*) y}{n}} \sum_{j=1}^{\infty} j^5 e^{-j \lambda^*} \\
+    &\leq EZ_n + (y + 1)^2 C W k^n \sum_{s = 1}^{n} \frac{K^s}{s^3 (n - s)^{3/2}} \, n^{\frac{3(n + s)}{2n}} \, k^{-(n + s)} \, e^{-(n + s) \frac{I'(x^*) y}{n}} H \\
+    &\leq EZ_n + H (y + 1)^2 C W \sum_{s = 1}^{n} \left(\frac{K}{k}\right)^s \frac{n^{\frac{3(n + s)}{2n}} \, e^{-(n + s) \frac{I'(x^*) y}{n}}}{s^3 (n - s)^{3/2}} \\
+    &\leq EZ_n \left( 1 + H (y + 1) C W \sum_{s = 1}^{n} \left(\frac{K}{k}\right)^s \frac{n^{\frac{3(n + s)}{2n}} \, e^{-s \frac{I'(x^*) y}{n}}}{s^3 (n - s)^{3/2}} \right)
+\end{align*}
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+Quisiera concluir que
+\[
+E Z_n^2 \leq c(y+1) E Z_n,
+\]
+y por lo tanto, usando nuevamente el metodo del segundo momento,
 
+\begin{align}
+P(M_n \geq a_n - 1) \geq P(Z_n \geq 1) \geq c \frac{E Z_n}{y+1} \geq c_0 e^{-I'(x^*) y}
+\end{align}
 
+Esto completa la evaluación de una cota inferior para la cola derecha de la ley de $M_n$.
+
+Con el fin de obtener una cota inferior para $EM_n$, solo necesitamos mostrar que
+
+\begin{align}
+    \lim_{y \to \infty} \limsup_{n \to \infty} \int_{-\infty}^{y} P(M_n \leq a_n(y)) \, dy = 0. 
+\end{align}
+
+Por otro lado, para cada $ v \in L_n $, sea $ w(v) \in L_s $ el ancestro de $v$ en la generación $s$. Entonces, por independencia,
+
+\begin{align}
+    P\left(M_n \leq -cs + (n - s)x^* - \frac{3}{2I'(x^*)} \log(n - s) \right) \leq (1 - c_0)^{k^s} + e^{-c's},
+\end{align}
+
+donde $ c_0 $ es como en (2.5.11). Esto implica (2.5.21). Junto con (2.5.20), esto completa la demostración del Teorema 1. \qed
 
 
 

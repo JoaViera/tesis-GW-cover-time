@@ -7,4 +7,4 @@
 \contentsline {section}{\numberline {2.1}Resultado sobre la ultima generación}{3}{section.2.1}%
 \contentsline {subsection}{\numberline {2.1.1}Cota superior}{3}{subsection.2.1.1}%
 \contentsline {subsection}{\numberline {2.1.2}Cota inferior}{4}{subsection.2.1.2}%
-\contentsline {section}{\numberline {2.2}Resultado sobre todo el arbol}{5}{section.2.2}%
+\contentsline {section}{\numberline {2.2}Resultado sobre todo el arbol}{6}{section.2.2}%
