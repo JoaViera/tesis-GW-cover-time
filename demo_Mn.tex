@@ -171,11 +171,56 @@ Juntando todo,
     &\leq EZ_n + H (y + 1)^2 C W \sum_{s = 1}^{n} \left(\frac{K}{k}\right)^s \frac{n^{\frac{3(n + s)}{2n}} \, e^{-(n + s) \frac{I'(x^*) y}{n}}}{s^3 (n - s)^{3/2}} \\
     &\leq EZ_n \left( 1 + H (y + 1) C W \sum_{s = 1}^{n} \left(\frac{K}{k}\right)^s \frac{n^{\frac{3(n + s)}{2n}} \, e^{-s \frac{I'(x^*) y}{n}}}{s^3 (n - s)^{3/2}} \right)
 \end{align*}
+ Por lo tanto,
+
+\[
+\begin{aligned}
+P(M_n \geq a_n - 1) 
+&\geq P(Z_n \geq 1) \\
+&\geq \frac{(E Z_n)^2}{E Z_n^2} \\
+&\geq \frac{E Z_n}{1 + H (y + 1) C W 
+    \sum_{s = 1}^{n} 
+    \frac{\left(\tfrac{K}{k}\right)^s \, n^{\tfrac{3(n + s)}{2n}} \, e^{- \tfrac{s I'(x^*) y}{n}}}
+         {s^3 (n - s)^{3/2}} } \\
+&\geq \frac{\tfrac{W_T}{C_T} c_0 (y+1) e^{-I'(x^*)y}}
+{1 + H (y + 1) C W 
+    \sum_{s = 1}^{n} 
+    \frac{\left(\tfrac{K}{k}\right)^s \, n^{\tfrac{3(n + s)}{2n}} \, e^{- \tfrac{s I'(x^*) y}{n}}}
+         {s^3 (n - s)^{3/2}} } \\
+&\geq \frac{\tfrac{W_T}{C_T} c_0 (y+1) e^{-I'(x^*)y}}
+{1 + H (y + 1) C W n^{3/2}
+    \sum_{s = 1}^{n} {
+    \left(\tfrac{K}{k}\right)^s} e^{- \tfrac{s I'(x^*) y}{n}}}.
+\end{aligned}
+\]
+
+
+Por otro lado, para cada $ v \in L_r $, sea $ w(v) \in L_r $ el ancestro de $v$ en la generación $r$. Entonces, por independencia,
+
+\[
+\begin{aligned}
+P\!\left(M_n \leq -cs + (n - r)x^* - \tfrac{3}{2I'(x^*)} \log(n - r) \right) \\
+\leq \Big( P\!\left(M_{n-r} \leq (n - r)x^* - \tfrac{3}{2I'(x^*)}\log(n - r)\right) \Big)^{|L_r|} 
+\quad + P\!\left( \min_{w \in L_r} h_s(w) \leq -cr \right)\\
+\leq \left(1 - \frac{c_0}
+{1 + H C_T ^2 (n-r)^{3/2}
+    \sum_{s = 1}^{n-r} 
+    \left(\tfrac{K}{k}\right)^s} 
+          \right)^{|L_r|} + e^{-c'r} \\
+\leq \left(1 - \frac{c_0}
+{1 + H C_T ^2 (n-r)^{3/2}
+    \sum_{s = 1}^{n-r} 
+    \left(\tfrac{K}{k}\right)^s} 
+          \right)^{\frac{W}{C} k^r} + e^{-c'r}.
+\end{aligned}
+\]
+
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-Quisiera concluir que
+\vspace{5em}
+A partir de 2.9 en el original concluye que
 \[
 E Z_n^2 \leq c(y+1) E Z_n,
 \]
