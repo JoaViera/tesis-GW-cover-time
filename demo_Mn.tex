@@ -26,237 +26,223 @@
 \section{Teorema de la Eleccion}
 
 \chapter{Resultado sobre el branching process}
-\section{Resultado sobre la ultima generación}
-Durante esta sección, para no sobrecargar de notación, dado un arbol de Galton-Watson $T$ que no se extingue 
-vamos a considerar $P(\cdot|T) = P(\cdot)$, analogamente con la esperanza.
+\section{Resultado sobre la última generación}
+
+Durante esta sección, para no sobrecargar la notación, dado un árbol de Galton-Watson $T$ que no se extingue, 
+vamos a considerar $P(\cdot \mid T) = P(\cdot)$, de forma análoga con la esperanza.
+
 \begin{theorem}
-Dado un GFF $\eta = (\eta_{v})_{v \in T_{n}}$, construido como antes. Entonces,
+Dado un GFF $\eta = (\eta_{v})_{v \in T_{n}}$, construido como antes, se tiene que
 \begin{align} 
-E[\max_{v \in L_n} \eta_v] = n\sqrt{2\log m} \, (1 + o(1)).
+E\left[\max_{v \in L_n} \eta_v\right] = n\sqrt{2\log m} \, (1 + o(1)).
 \end{align}
 \end{theorem}
 
 \subsection{Cota superior}
 
 Sea $\bar{Z}_n = \sum_{v \in L_n} \mathbf{1}_{S_v > (1 + \epsilon)x^* n}$, 
-que cuenta la cantidad de vertices, en la $n$-th generación, 
-se encuentran por arriba de $n x^*(1 + \epsilon)$. Aplicando el metodo del primer momento: 
-tenemos, para todo $v \in L_n$,
+que cuenta la cantidad de vértices, en la generación $n$-ésima, 
+que se encuentran por encima de $n x^*(1 + \epsilon)$. Aplicando el método del primer momento, 
+tenemos, para todo $v \in L_n$:
 \[
-E\bar{Z}_n = |L_n| P(S_v > n(1 + \epsilon)x^*) \leq CW k^n e^{-n I((1 + \epsilon)x^*)},
+E[\bar{Z}_n] = |L_n| \, P(S_v > n(1 + \epsilon)x^*) \leq CW k^n e^{-n I((1 + \epsilon)x^*)},
 \]
-Donde aplicamos la desigualdad de Chebyshev en la ultima desigualdad y la definicion de $I$. Además, por 
-la monotonia estricta de $I$, tenemos que $E \bar{Z}_n \leq e^{-n c(\epsilon)}$, 
-para algun $c(\epsilon) > 0$. Por lo tanto,
+donde aplicamos la desigualdad de Chebyshev en la última desigualdad y la definición de $I$. Además, por 
+la monotonía estricta de $I$, tenemos que $E[\bar{Z}_n] \leq e^{-n c(\epsilon)}$, 
+para algún $c(\epsilon) > 0$. Por lo tanto,
 \begin{align}
-P(M_n > (1 + \epsilon) n x^*) \leq E [\bar{Z}_n] \leq CWe^{-c(\epsilon)n}.
+P(M_n > (1 + \epsilon) n x^*) \leq E[\bar{Z}_n] \leq CWe^{-c(\epsilon)n}.
 \end{align}
-Por otro lado,
 
+Por otro lado,
 \begin{align}
-EM_n \leq EM_n\mathbf{1}_{M_n \geq 0} &= \int_{0}^{\infty} P(M_n > t) dt \nonumber\\
-&= \int_{0}^{(1+\epsilon)nx^*} P(M_n > t) dt + \int_{(1+\epsilon)nx^*}^{\infty} P(M_n > t) dt .\nonumber
+E[M_n] \leq E[M_n \mathbf{1}_{M_n \geq 0}] &= \int_{0}^{\infty} P(M_n > t) \, dt \nonumber\\
+&= \int_{0}^{(1+\epsilon)nx^*} P(M_n > t) \, dt + \int_{(1+\epsilon)nx^*}^{\infty} P(M_n > t) \, dt. \nonumber
 \end{align}
-Luego, usando la cota de 4.2 en el segundo integrando de 4.3 e integrando, llegamos a que,
+
+Luego, usando la cota de (4.2) en el segundo integrando de (4.3) e integrando, llegamos a que
 \begin{align}
-EM_n \leq nx^*(1+\epsilon) + nx^* \frac{CWe^{-2nI(x^*)\epsilon}}{2nI(x^*)}.
+E[M_n] \leq nx^*(1+\epsilon) + nx^* \frac{CWe^{-2nI(x^*)\epsilon}}{2nI(x^*)}.
 \end{align}
-Para todo $\epsilon > 0$. Haciendo $\epsilon \to 0$ obtenemos la cota superior.
+Para todo $\epsilon > 0$. Haciendo $\epsilon \to 0$, obtenemos la cota superior.
 
 \subsection{Cota inferior}
-Sea $y>0$ independiente de $n$ y sea
+
+Sea $y > 0$ independiente de $n$ y definamos
 \[
-a_n = a_n(y) = x^*n - \frac{3}{2I'(x^*)} \text{log} n.
+a_n = a_n(y) = x^*n - \frac{3}{2I'(x^*)} \log n.
 \]
+
 Dado $v \in L_n$, definimos el evento
 \[
-A_v = \{ S_v \in [y+a_n-1,y+a_n], S_v(t)\leq a_n t / n + y, t = 1, \dots, n \},
+A_v = \left\{ S_v \in [y + a_n - 1, y + a_n],\; S_v(t) \leq \frac{a_n t}{n} + y,\; t = 1, \dots, n \right\},
 \]
 y sea
 \[
-Z_n = \sum_{v \in L_n}^{} \mathbf{1}_{A_v}.
+Z_n = \sum_{v \in L_n} \mathbf{1}_{A_v}.
 \]
 
-Para derivar una cota inferior de $EM_n$, primero necesitamos una cota inferior en la
-cola derecha de la distribucion de $M_n$, la cual vamos a obtener utilizando el metodo del segundo momento. 
-Para esto, primero calculamos $P(A_v)$. Recordemos que $I(x^*) = \text{log} k$, con $\lambda^*=I'(x^*)$. 
-Introducimos un nuevo parametro $\lambda_{n}^{*}$ tal que
+Para derivar una cota inferior de $E[M_n]$, primero necesitamos una cota inferior en la
+cola derecha de la distribución de $M_n$, la cual vamos a obtener utilizando el método del segundo momento. 
+Para esto, primero calculamos $P(A_v)$. Recordemos que $I(x^*) = \log k$, con $\lambda^* = I'(x^*)$. 
+Introducimos un nuevo parámetro $\lambda_{n}^{*}$ tal que
 \[
-\lambda_{n}^{*}\frac{a_n}{n}-\varLambda(\lambda_{n}^{*}) = I(a_n/n).
+\lambda_{n}^{*} \frac{a_n}{n} - \Lambda(\lambda_{n}^{*}) = I(a_n/n).
 \]
-Como $I'(a_n/n) = \lambda_{n}^{*}$, es facil chequear que $\lambda_{n}^{*} = 
-\lambda^* - 3I''(x^*) \text{log}n/(2nI'(x^*)) + O(1/n)$. (En el caso Gaussiano, $\lambda_{n}^{*} = a_n / n $)
+
+Como $I'(a_n/n) = \lambda_{n}^{*}$, es fácil verificar que
+\[
+\lambda_{n}^{*} = 
+\lambda^* - \frac{3 I''(x^*) \log n}{2n I'(x^*)} + O\left(\frac{1}{n}\right).
+\]
+(En el caso gaussiano, $\lambda_{n}^{*} = a_n / n$).
 
 Definimos una nueva medida de probabilidad $Q$ en $\mathbb{R}$ por
 \[
-\frac{d\mu}{dQ}(x) = e^{-\lambda_{n}^{*}x + \varLambda(\lambda_{n}^{*})},
+\frac{d\mu}{dQ}(x) = e^{-\lambda_{n}^{*}x + \Lambda(\lambda_{n}^{*})},
 \]
-y con un abuso de notacion continuamos usan $Q$ cuando hablemos sobre un paseo aleatorio 
-cuyos incrementos sean i.i.d. y distribuidos de acuerdo a $Q$. Notar que en el caso Gaussiano, 
-$Q$ solamente modifica la media de $P$. \\
+y, con un abuso de notación, continuamos usando $Q$ cuando hablemos sobre un paseo aleatorio 
+cuyos incrementos sean i.i.d. y distribuidos de acuerdo a $Q$. Notar que, en el caso gaussiano, 
+$Q$ solamente modifica la media de $P$. 
 
-Ahora podemos escribir 
-
+Ahora podemos escribir:
 \begin{align}
-P(A_v) &= E_Q (e^{-\lambda_n^* S_v + n \Lambda(\lambda_n^*)} \mathbf{1}_{A_v}) \nonumber \\
+P(A_v) &= E_Q \left(e^{-\lambda_n^* S_v + n \Lambda(\lambda_n^*)} \mathbf{1}_{A_v} \right) \nonumber \\
 &\geq e^{-n [\lambda_n^* a_n/n - \Lambda(\lambda_n^*)]} E_Q(A_v) \\
-&= e^{-n I(a_n/n)} P_Q ( \tilde{S}_v \in [0,1], \tilde{S}_v (t) \geq 0, t = 1, \dots, n ). \nonumber 
+&= e^{-n I(a_n/n)} P_Q \left( \tilde{S}_v \in [0,1],\; \tilde{S}_v(t) \geq 0,\; t = 1, \dots, n \right), \nonumber 
 \end{align}
 
-donde $\tilde{S}_v (t) = a_n t / n - S_v (t)$ es un paseo aleatorio con incrementos i.i.d los cuales tienen media $0$ bajo $Q$. 
-Ademas, en el caso Gaussiano, los incrementos son Gaussianos y no dependen de $n$.
+donde $\tilde{S}_v (t) = a_n t / n - S_v (t)$ es un paseo aleatorio con incrementos i.i.d. de media cero bajo $Q$. 
+Además, en el caso gaussiano, los incrementos son gaussianos y no dependen de $n$.
 
-Aplicando el Teorema de la Eleccion, obtenemos que 
+Aplicando el Teorema de la Elección, obtenemos que 
 \begin{align}
-    P(A_v) \geq c_0 \frac{y+1}{n^{3/2}} e^{-nI((a_n+y)/n)}.
+P(A_v) \geq c_0 \frac{y + 1}{n^{3/2}} e^{-nI((a_n + y)/n)}.
 \end{align}
-Agrego detalles sobre esto? \\
-Como 
+
+¿Agregar detalles sobre esto?
+
+Como
 \[
-I((a_n+y)/n) = I(x^*) - I'(x^*)\left(\frac{3}{2I'(x^*)}.\frac{\text{log}n}{n}-\frac{y}{n}\right)+O\left(\left(\frac{\text{log}n}{n}\right)^2\right),
+I\left(\frac{a_n + y}{n}\right) = I(x^*) - I'(x^*)\left( \frac{3 \log n}{2n I'(x^*)} - \frac{y}{n} \right) + O\left(\left(\frac{\log n}{n}\right)^2\right),
 \]
 podemos concluir que
 \[
-P(A_v) \geq c_0 (y+1)k^{-n}e^{-I'(x^*)y},
+P(A_v) \geq c_0 (y + 1) k^{-n} e^{-I'(x^*) y},
 \]
 y por lo tanto
 \begin{align}
-    EZ_n = |L_n| P(A_v) \geq \frac{W_T}{C_T}c_0 (y+1) e^{-I'(x^*)y}.
+E[Z_n] = |L_n| P(A_v) \geq \frac{W_T}{C_T} c_0 (y + 1) e^{-I'(x^*) y}.
 \end{align}
-Dejamos resaltada la dependencia de las constantes del arbol, ya que va a jugar un papel principal en porque pedimos que tenga grado acotado la distribucion.
-\par
-A continuacion necesitamos probar una cota soperior sobre
+
+Resaltamos la dependencia de las constantes en el árbol, ya que jugarán un papel principal en justificar por qué pedimos que la distribución tenga grado acotado.
+
+A continuación, necesitamos probar una cota superior sobre
 \begin{align}
-    EZ_n^2 &= |L_n|P(A_v) + \sum_{v \neq w \in L_n}^{} P(A_v \cap A_w) 
-           &= EZ_n + \sum_{v \in L_n}^{} \sum_{s = 1}^{n} |D_s^v| P(A_v \cap A_{v_s}),
+E[Z_n^2] &= |L_n| P(A_v) + \sum_{v \neq w \in L_n} P(A_v \cap A_w) \nonumber \\
+         &= E[Z_n] + \sum_{v \in L_n} \sum_{s = 1}^{n} |D_s^v| P(A_v \cap A_{v_s}),
 \end{align}
-Donde $D_s^v = \{ w \in L_n | d(v,w) = 2s \} $ y $v_s \in L_n$ tal que $d(v,v_s) = 2s$. \\
-Necesito ver que $|D_s^v|$ es $O(k^s)$, es facil ver
+donde $D_s^v = \{ w \in L_n \mid d(v,w) = 2s \}$ y $v_s \in L_n$ tal que $d(v, v_s) = 2s$.
+
+Necesitamos ver que $|D_s^v| = O(k^s)$. Es fácil ver que
 \begin{align}
-    |D_s^v| \leq |L_s(T_{v_s})| \leq C(T_{v_s}) K k^s.
+|D_s^v| \leq |L_s(T_{v_s})| \leq C(T_{v_s}) K k^s.
 \end{align}
-Me faltaria acotar esta constante $C$ universalmente para todo $v_s \in L_{n-s}$. Para esto puedo hacer una 
-especie de probabilidad total, donde condiciono a que todos estos subarboles a partir de la generacion $l$ 
-ya esten a lo sumo a distancia $\beta$ de su W, elijo $l$ y $\beta$ de forma que este evento tenga alta 
-probabilidad. Por lo que, puedo tomar $C = max\{k^l, \beta\}$. 
+
+Faltaría acotar esta constante $C$ universalmente para todo $v_s \in L_{n-s}$. Para esto, podemos hacer una 
+especie de argumento de probabilidad total, condicionando a que todos estos subárboles, a partir de la generación $l$, 
+estén a lo sumo a distancia $\beta$ de su $W$. Elegimos $l$ y $\beta$ de forma que este evento tenga alta 
+probabilidad. Por lo tanto, podemos tomar $C = \max\{k^l, \beta\}$.
 
 \vspace{1em}
 
-Ahora veamos de acotar $P(A_v \cap A_{v_s})$, para esto condicionamos al valor de $S_v (n-s)$. 
-En particular, con un poco de abuso de notacion, notamos $I_{j,s} = a_n (n-s)/n + [-j,-j+1] + y$, ahora tenemos que
+Ahora veamos cómo acotar $P(A_v \cap A_{v_s})$. Para esto, condicionamos al valor de $S_v(n - s)$. 
+Con un pequeño abuso de notación, definimos $I_{j,s} = a_n (n - s)/n + [-j, -j + 1] + y$. Entonces:
+
 \begin{align}
-&P(A_u \cap A_{v_s}) \leq \sum_{j=1}^{\infty} P\Big(S_v(t) \leq a_n t/n + y,\, t = 1, \ldots, n - s,\, S_v(n - s) \in I_{j,s}\Big) \nonumber \\
-&\times \max_{z \in I_{j,s}} \Big(P\big(S_v(s) \in [y + a_n - 1, y + a_n],
-S_v(t) \leq a_n(n - s + t)/n + y,\, 1 \leq t \leq s \mid S_v(0) = z\big)\Big)^2. \nonumber
+P(A_v \cap A_{v_s}) &\leq \sum_{j = 1}^{\infty} P\left(S_v(t) \leq \frac{a_n t}{n} + y,\; t = 1, \ldots, n - s,\; S_v(n - s) \in I_{j,s} \right) \nonumber \\
+&\quad \times \max_{z \in I_{j,s}} \left( P\left( S_v(s) \in [y + a_n - 1, y + a_n],\; S_v(t) \leq \frac{a_n(n - s + t)}{n} + y,\; 1 \leq t \leq s \mid S_v(0) = z \right) \right)^2. \nonumber
 \end{align}
-Agregar detalles \\
-Usando la cota superior del Teorema de la Eleccion concluimos que
+
+¿Agregar detalles?
+
+Usando la cota superior del Teorema de la Elección, concluimos que
 \begin{align}
-    P(A_v \cap A_{v_s}) \leq \sum_{j=1}^{\infty} 
+P(A_v \cap A_{v_s}) \leq \sum_{j = 1}^{\infty} 
 \frac{j^5 (y + 1)^2}{s^3 (n - s)^{3/2}} 
 e^{-j \lambda^*} 
-n^{3(n + s)/2n} 
+n^{\frac{3(n + s)}{2n}} 
 k^{-(n + s)} 
-e^{-(n + s) I'(x^*) y / n}.
+e^{-(n + s) \frac{I'(x^*) y}{n}}.
 \end{align}
-Agregar detalles\\
 
-Juntando todo,
+¿Agregar detalles?
+
+Juntando todo:
 \begin{align*}
-    EZ_n^2
-    &= EZ_n + \sum_{v \in L_n} \sum_{s = 1}^{n} |D_s^v| \sum_{j=1}^{\infty} 
-    \frac{j^5 (y + 1)^2}{s^3 (n - s)^{3/2}} \, e^{-j \lambda^*} \, n^{\frac{3(n + s)}{2n}} \, k^{-(n + s)} \, e^{-(n + s) \frac{I'(x^*) y}{n}} \\
-    &\leq EZ_n + (y + 1)^2 \sum_{v \in L_n} \sum_{s = 1}^{n} \frac{K^s}{s^3 (n - s)^{3/2}} \, n^{\frac{3(n + s)}{2n}} \, k^{-(n + s)} \, e^{-(n + s) \frac{I'(x^*) y}{n}} \sum_{j=1}^{\infty} j^5 e^{-j \lambda^*} \\
-    &\leq EZ_n + (y + 1)^2 C W k^n \sum_{s = 1}^{n} \frac{K^s}{s^3 (n - s)^{3/2}} \, n^{\frac{3(n + s)}{2n}} \, k^{-(n + s)} \, e^{-(n + s) \frac{I'(x^*) y}{n}} H \\
-    &\leq EZ_n + H (y + 1)^2 C W \sum_{s = 1}^{n} \left(\frac{K}{k}\right)^s \frac{n^{\frac{3(n + s)}{2n}} \, e^{-(n + s) \frac{I'(x^*) y}{n}}}{s^3 (n - s)^{3/2}} \\
-    &\leq EZ_n \left( 1 + H (y + 1) C W \sum_{s = 1}^{n} \left(\frac{K}{k}\right)^s \frac{n^{\frac{3(n + s)}{2n}} \, e^{-s \frac{I'(x^*) y}{n}}}{s^3 (n - s)^{3/2}} \right)
+E[Z_n^2]
+&\leq E[Z_n] + \sum_{v \in L_n} \sum_{s = 1}^{n} |D_s^v| \sum_{j = 1}^{\infty} 
+\frac{j^5 (y + 1)^2}{s^3 (n - s)^{3/2}} \, e^{-j \lambda^*} \, n^{\frac{3(n + s)}{2n}} \, k^{-(n + s)} \, e^{-(n + s) \frac{I'(x^*) y}{n}} \\
+&\leq E[Z_n] + H (y + 1)^2 C W \sum_{s = 1}^{n} \left( \frac{K}{k} \right)^s \frac{n^{\frac{3(n + s)}{2n}} e^{-s \frac{I'(x^*) y}{n}}}{s^3 (n - s)^{3/2}}.
 \end{align*}
- Por lo tanto,
+
+Por lo tanto,
 
 \[
 \begin{aligned}
 P(M_n \geq a_n - 1) 
-&\geq P(Z_n \geq 1) \\
-&\geq \frac{(E Z_n)^2}{E Z_n^2} \\
-&\geq \frac{E Z_n}{1 + H (y + 1) C W 
+&\geq P(Z_n \geq 1) 
+\geq \frac{(E[Z_n])^2}{E[Z_n^2]} \\
+&\geq \frac{E[Z_n]}{1 + H (y + 1) C W 
     \sum_{s = 1}^{n} 
     \frac{\left(\tfrac{K}{k}\right)^s \, n^{\tfrac{3(n + s)}{2n}} \, e^{- \tfrac{s I'(x^*) y}{n}}}
          {s^3 (n - s)^{3/2}} } \\
-&\geq \frac{\tfrac{W_T}{C_T} c_0 (y+1) e^{-I'(x^*)y}}
-{1 + H (y + 1) C W 
+&\geq \frac{\tfrac{W_T}{C_T} c_0 (y + 1) e^{-I'(x^*) y}}{1 + H (y + 1) C W n^{3/2}
     \sum_{s = 1}^{n} 
-    \frac{\left(\tfrac{K}{k}\right)^s \, n^{\tfrac{3(n + s)}{2n}} \, e^{- \tfrac{s I'(x^*) y}{n}}}
-         {s^3 (n - s)^{3/2}} } \\
-&\geq \frac{\tfrac{W_T}{C_T} c_0 (y+1) e^{-I'(x^*)y}}
-{1 + H (y + 1) C W n^{3/2}
-    \sum_{s = 1}^{n} {
-    \left(\tfrac{K}{k}\right)^s} e^{- \tfrac{s I'(x^*) y}{n}}}.
+    \left( \tfrac{K}{k} \right)^s e^{- \tfrac{s I'(x^*) y}{n}} }.
 \end{aligned}
 \]
 
-
-Por otro lado, para cada $ v \in L_r $, sea $ w(v) \in L_r $ el ancestro de $v$ en la generación $r$. Entonces, por independencia,
+Por otro lado, para cada $v \in L_r$, sea $w(v) \in L_r$ el ancestro de $v$ en la generación $r$. Entonces, por independencia:
 
 \[
 \begin{aligned}
-P\!\left(M_n \leq -cs + (n - r)x^* - \tfrac{3}{2I'(x^*)} \log(n - r) \right) \\
-\leq \Big( P\!\left(M_{n-r} \leq (n - r)x^* - \tfrac{3}{2I'(x^*)}\log(n - r)\right) \Big)^{|L_r|} 
-\quad + P\!\left( \min_{w \in L_r} h_s(w) \leq -cr \right)\\
-\leq \left(1 - \frac{c_0}
-{1 + H C_T ^2 (n-r)^{3/2}
-    \sum_{s = 1}^{n-r} 
-    \left(\tfrac{K}{k}\right)^s} 
-          \right)^{|L_r|} + e^{-c'r} \\
-\leq \left(1 - \frac{c_0}
-{1 + H C_T ^2 (n-r)^{3/2}
-    \sum_{s = 1}^{n-r} 
-    \left(\tfrac{K}{k}\right)^s} 
-          \right)^{\frac{W}{C} k^r} + e^{-c'r}\\
-\leq \left(1 - \frac{c_0}
-{1 + H C_T ^2 (n-r)^{3/2}
-    (\frac{K}{k})^{n-r+1}} 
-          \right)^{\frac{W}{C} k^r} + e^{-c'r}.
+P\left(M_n \leq -cs + (n - r)x^* - \tfrac{3}{2I'(x^*)} \log(n - r) \right) 
+&\leq \left( 1 - \frac{c_0}{1 + H C_T^2 (n - r)^{3/2} \sum_{s = 1}^{n - r} \left( \tfrac{K}{k} \right)^s} \right)^{|L_r|} + e^{-c' r} \\
+&\leq \left( 1 - \frac{c_0}{1 + H C_T^2 (n - r)^{3/2} \left( \tfrac{K}{k} \right)^{n - r + 1}} \right)^{\frac{W}{C} k^r} + e^{-c'r}.
 \end{aligned}
 \]
 
-Con esto podemos ver que, en principio, no tiende a 0 la expresion anterior.
+Con esto podemos ver que, en principio, la expresión anterior **no tiende a 0**. Sospechamos que debemos pedir más restricciones al árbol.
 
-Sospecho que debo pedirle mas al arbol.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{5em}
-A partir de 2.9 en el original concluye que
-\[
-E Z_n^2 \leq c(y+1) E Z_n,
-\]
-y por lo tanto, usando nuevamente el metodo del segundo momento,
 
+A partir de (2.9) en el original, se concluye que
+\[
+E[Z_n^2] \leq c(y + 1) E[Z_n],
+\]
+y por lo tanto, usando nuevamente el método del segundo momento,
 \begin{align}
-P(M_n \geq a_n - 1) \geq P(Z_n \geq 1) \geq c \frac{E Z_n}{y+1} \geq c_0 e^{-I'(x^*) y}
+P(M_n \geq a_n - 1) \geq P(Z_n \geq 1) \geq c \frac{E[Z_n]}{y + 1} \geq c_0 e^{-I'(x^*) y}.
 \end{align}
 
 Esto completa la evaluación de una cota inferior para la cola derecha de la ley de $M_n$.
 
-Con el fin de obtener una cota inferior para $EM_n$, solo necesitamos mostrar que
-
+Para obtener una cota inferior para $E[M_n]$, solo necesitamos mostrar que
 \begin{align}
-    \lim_{y \to \infty} \limsup_{n \to \infty} \int_{-\infty}^{y} P(M_n \leq a_n(y)) \, dy = 0. 
+\lim_{y \to \infty} \limsup_{n \to \infty} \int_{-\infty}^{y} P(M_n \leq a_n(y)) \, dy = 0. 
 \end{align}
 
-Por otro lado, para cada $ v \in L_n $, sea $ w(v) \in L_s $ el ancestro de $v$ en la generación $s$. Entonces, por independencia,
-
+Por otro lado, para cada $v \in L_n$, sea $w(v) \in L_s$ el ancestro de $v$ en la generación $s$. Entonces, por independencia,
 \begin{align}
-    P\left(M_n \leq -cs + (n - s)x^* - \frac{3}{2I'(x^*)} \log(n - s) \right) \leq (1 - c_0)^{k^s} + e^{-c's},
+P\left(M_n \leq -cs + (n - s)x^* - \frac{3}{2I'(x^*)} \log(n - s) \right) \leq (1 - c_0)^{k^s} + e^{-c's},
 \end{align}
 
-donde $ c_0 $ es como en (2.5.11). Esto implica (2.5.21). Junto con (2.5.20), esto completa la demostración del Teorema 1. \qed
-
-
+donde $c_0$ es como en (2.5.11). Esto implica (2.5.21). Junto con (2.5.20), se completa la demostración del Teorema 1. \qed
 
 
 
 \section{Resultado sobre todo el arbol}
-Comparación con literatura o hipótesis.
 
 
 \end{document}
